@@ -1,0 +1,21 @@
+{
+    "Port": 80,
+    "Redirections": [
+        {
+            "Path": "songbook.llgmusic.net/",
+            "URL": "http://127.0.0.1:8081/"
+        }, 
+        {
+            "Path": "www.llgmusic.net/",
+            "URL": "http://127.0.0.1:8082/"
+        }, 
+        {
+            "Path": "llgmusic.net/",
+            "URL": "http://127.0.0.1:8082/"
+        },
+        {
+            "Path": "/mywebapp/",
+            "URL": "/opt/mywebapp"
+        }
+    ]
+}
