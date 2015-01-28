@@ -36,14 +36,7 @@ var logger *log.Logger
 
 func Log(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		logger.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
-		if origin := r.Header.Get("Origin"); origin != "" {
-			w.Header().Set("Access-Control-Allow-Origin", origin)
-		}
-		//		w.Header().Set("Access-Control-Allow-Origin", "3ds.com")
-		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Origin, Accept, Format, NoDefault, x-requested-method, x-requested-with, x-request")
-		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		logger.Printf("%s %s %s%s", r.RemoteAddr, r.Method, r.Host, r.URL)
 		handler.ServeHTTP(w, r)
 	})
 }
