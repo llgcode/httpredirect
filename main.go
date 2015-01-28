@@ -65,23 +65,28 @@ func main() {
 		log.Println(err)
 		router.Redirections = []Redirection{{Path: "/", URL: "."}}
 	} else {
-		defer routerFile.Close()
 		json.NewDecoder(routerFile).Decode(&router)
+		routerFile.Close()
 	}
 
 	routerStr, _ := json.MarshalIndent(router, "", "  ")
 	logger.Printf("Router: %s", routerStr)
 
 	for _, redirection := range router.Redirections {
+		relativePath := redirection.Path
+		i := strings.Index(redirection.Path, "/")
+		if i != -1 {
+			relativePath = redirection.Path[i:]
+		}
 		if strings.HasPrefix(redirection.URL, "http") {
 			redirectUrl, err := url.Parse(redirection.URL)
 			if err != nil {
 				log.Println(err)
 				return
 			}
-			http.Handle(redirection.Path, http.StripPrefix(redirection.Path, httputil.NewSingleHostReverseProxy(redirectUrl)))
+			http.Handle(redirection.Path, http.StripPrefix(relativePath, Log(httputil.NewSingleHostReverseProxy(redirectUrl))))
 		} else {
-			http.Handle(redirection.Path, http.StripPrefix(redirection.Path, http.FileServer(http.Dir(redirection.URL))))
+			http.Handle(redirection.Path, http.StripPrefix(relativePath, http.FileServer(http.Dir(redirection.URL))))
 		}
 
 	}
