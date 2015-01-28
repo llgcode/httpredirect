@@ -1,3 +1,4 @@
+[![Build Status](https://drone.io/github.com/llgcode/httpredirect/status.png)](https://drone.io/github.com/llgcode/httpredirect/latest)
 # httpredirect
 Http Server written in Golang that make simple redirection. 
 
@@ -9,6 +10,7 @@ from source, first install [golang](http://golang.org/doc/install) and then exec
 ```
 go install github.com/llgcode/httpredirect
 ```
+
  
 Sample config file
 ```json
