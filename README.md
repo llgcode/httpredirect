@@ -11,8 +11,18 @@ from source, first install [golang](http://golang.org/doc/install) and then exec
 go install github.com/llgcode/httpredirect
 ```
 
- 
-Sample config file
+# Run
+
+```
+$ httpredirect.exe --help
+Usage of httpredirect.exe:
+  -log="": Define log file
+  -router="router.json": Define router file
+  -sslCert="": Path to certificate file
+  -sslKey="": Path to key file
+```
+
+# router.json
 ```json
 {
  "Port": 80,
