@@ -5,7 +5,7 @@ it support ssl, vhosts, simple serving files, http redirection
 
 # Installation
 
-from source, first install [golang](http://golang.org)
+from source, first install [golang](http://golang.org/doc/install) and then execute this command
 ```
 go install github.com/llgcode/httpredirect
 ```
